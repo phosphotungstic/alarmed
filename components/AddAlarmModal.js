@@ -6,6 +6,11 @@ export default class AddAlarmModal extends React.Component {
   state = {
     modalVisible: false,
   };
+
+  constructor(props) {
+    super(props);
+    this.setModalVisible = this.setModalVisible.bind(this);
+  }
   
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
@@ -19,16 +24,7 @@ export default class AddAlarmModal extends React.Component {
           transparent={false}
           visible={this.state.modalVisible}>
           <View style={{marginTop: 22}}>
-            <Text>oof</Text>
-
-            <AddAlarmModalForm></AddAlarmModalForm>
-
-            <Button
-              title="Save"
-              onPress={() => {
-                this.setModalVisible(false);
-              }}
-            />
+            <AddAlarmModalForm setModalVisible={this.setModalVisible}></AddAlarmModalForm>
           </View>
         </Modal>
 

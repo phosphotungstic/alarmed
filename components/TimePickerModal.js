@@ -9,12 +9,14 @@ export default class TimePickerModal extends React.Component {
   };
   
   setModalVisible(visible) {
+    if(!visible) {
+      this.props.setDate(this.state.chosenDate);
+    }
     this.setState({modalVisible: visible});
   }
 
   setDate(date) {
     this.setState({chosenDate: date});
-    this.props.setStartDate(date);
   }
 
   render() {

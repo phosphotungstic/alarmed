@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, DatePickerIOS } from 'react-native';
+import { View, Text, TextInput, DatePickerIOS, Button } from 'react-native';
 import TimePickerModal from './TimePickerModal.js';
 
 export default class AddAlarmModalForm extends React.Component {
@@ -12,8 +12,9 @@ export default class AddAlarmModalForm extends React.Component {
 
   constructor(props) {
     super(props)
-
-    this.setStartDate = this.setStartDate.bind(this)
+    this.setStartDate = this.setStartDate.bind(this);
+    this.setEndDate = this.setEndDate.bind(this);
+    this.setModalVisible = this.props.setModalVisible.bind(this);
   }
 
   setStartDate(date) {
@@ -33,21 +34,29 @@ export default class AddAlarmModalForm extends React.Component {
         <TextInput
           style={{width: 80, height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(text) => this.setState({alarmName: text})}
-          value={this.state.alarmName}/>
+          value={this.state.alarmName}
+          returnKeyType="done"/>
 
-        <TimePickerModal setStartDate={this.setStartDate} type="Start"></TimePickerModal>
-        <TimePickerModal setEndDate={this.setEndDate} type="End"></TimePickerModal>
+        <TimePickerModal setDate={this.setStartDate} type="Start"></TimePickerModal>
+        <TimePickerModal setDate={this.setEndDate} type="End"></TimePickerModal>
 
         <Text>Number of Triggers</Text>
         <TextInput
           style={{width: 80, height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(text) => this.setState({numberTriggers: text})}
-          value={this.state.numberTriggers}/>
+          value={this.state.numberTriggers}
+          keyboardType="number-pad"
+          returnKeyType="done"/>
 
         <Text>state.alarmName = {this.state.alarmName}</Text>
         <Text>state.numberTriggers = {this.state.numberTriggers}</Text>
         <Text>state.startDate = {this.state.startDate.getTime()}</Text>
         <Text>state.endDate = {this.state.endDate.getTime()}</Text>
+
+        <Button
+          title="Save"
+          onPress={() => {this.props.setModalVisible(false);}}
+        />
       </View>
     );
   }
