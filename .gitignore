@@ -1,3 +1,6 @@
+# ignore react native notes file
+README_react.md
+
 # Logs
 logs
 *.log
