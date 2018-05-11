@@ -1,6 +1,9 @@
 # ignore react native notes file
 README_react.md
 
+# ignore .expo stuff
+.expo/
+
 # Logs
 logs
 *.log
