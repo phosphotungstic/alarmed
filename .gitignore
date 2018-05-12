@@ -4,6 +4,9 @@ README_react.md
 # ignore .expo stuff
 .expo/
 
+# ignore fonts
+fonts/
+
 # Logs
 logs
 *.log

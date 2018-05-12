@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, View, Modal, Text, TouchableHighlight } from 'react-native';
+import { Icon } from 'native-base';
 import AddAlarmModalForm from './AddAlarmModalForm.js'
 
 export default class AddAlarmModal extends React.Component {
@@ -18,7 +19,7 @@ export default class AddAlarmModal extends React.Component {
 
   render() {
     return (
-      <View style={{marginTop: 22}}>
+      <View>
         <Modal
           animationType="slide"
           transparent={false}
@@ -29,7 +30,7 @@ export default class AddAlarmModal extends React.Component {
         </Modal>
 
           <Button
-            title="Add alarm"
+            title="+"
             onPress={() => {
               this.setModalVisible(true);
             }}

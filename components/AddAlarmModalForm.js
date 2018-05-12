@@ -14,7 +14,7 @@ export default class AddAlarmModalForm extends React.Component {
     super(props)
     this.setStartDate = this.setStartDate.bind(this);
     this.setEndDate = this.setEndDate.bind(this);
-    this.setModalVisible = this.props.setModalVisible.bind(this);
+    this.setModalVisible = this.setModalVisible.bind(this);
   }
 
   setStartDate(date) {
@@ -24,6 +24,16 @@ export default class AddAlarmModalForm extends React.Component {
   setEndDate(date) {
     this.setState({endDate: date});
   }
+
+  setModalVisible() {
+    this.props.setModalVisible(false);
+  }
+
+  // validateForm() {
+  //   if(this.state.alarmName.length == 0 || this.state.alarmName == undefined) {
+
+  //   }
+  // }
 
   render() {
     return (
@@ -55,7 +65,7 @@ export default class AddAlarmModalForm extends React.Component {
 
         <Button
           title="Save"
-          onPress={() => {this.props.setModalVisible(false);}}
+          onPress={this.setModalVisible}
         />
       </View>
     );
