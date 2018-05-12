@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput, DatePickerIOS, Button } from 'react-native';
+import { View, Text, TextInput, DatePickerIOS, Button, StyleSheet } from 'react-native';
+import { Form, Item, Input, Label } from 'native-base';
 import TimePickerModal from './TimePickerModal.js';
 
 export default class AddAlarmModalForm extends React.Component {
@@ -26,6 +27,7 @@ export default class AddAlarmModalForm extends React.Component {
   }
 
   setModalVisible() {
+    //this.validateForm();
     this.props.setModalVisible(false);
   }
 
@@ -38,36 +40,65 @@ export default class AddAlarmModalForm extends React.Component {
   render() {
     return (
       <View>
-        <Text>Add New Alarm</Text>
-        
-        <Text>Alarm Name</Text>
-        <TextInput
-          style={{width: 80, height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({alarmName: text})}
-          value={this.state.alarmName}
-          returnKeyType="done"/>
+        <Text style={styles.titleText}>Add New Alarm</Text>
+
+        <Form style={styles.formInputText}>
+          <Item stackedLabel>
+            <Label>Alarm Name</Label>
+            <Input
+              onChangeText={(text) => this.setState({alarmName: text})}
+              returnKeyType="done"/>
+          </Item>
+        </Form>
+
+        <Form style={styles.formInputText}>
+          <Item stackedLabel>
+            <Label>Number of Triggers</Label>
+            <Input
+              onChangeText={(text) => this.setState({numberTriggers: text})}
+              keyboardType="number-pad"
+              returnKeyType="done"/>
+          </Item>
+        </Form>
 
         <TimePickerModal setDate={this.setStartDate} type="Start"></TimePickerModal>
         <TimePickerModal setDate={this.setEndDate} type="End"></TimePickerModal>
-
-        <Text>Number of Triggers</Text>
-        <TextInput
-          style={{width: 80, height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({numberTriggers: text})}
-          value={this.state.numberTriggers}
-          keyboardType="number-pad"
-          returnKeyType="done"/>
-
-        <Text>state.alarmName = {this.state.alarmName}</Text>
-        <Text>state.numberTriggers = {this.state.numberTriggers}</Text>
-        <Text>state.startDate = {this.state.startDate.getTime()}</Text>
-        <Text>state.endDate = {this.state.endDate.getTime()}</Text>
 
         <Button
           title="Save"
           onPress={this.setModalVisible}
         />
+
+        <Text>state.alarmName = {this.state.alarmName}</Text>
+        <Text>state.numberTriggers = {this.state.numberTriggers}</Text>
+        <Text>state.startDate = {this.getTime(this.state.startDate)}</Text>
+        <Text>state.endDate = {this.getTime(this.state.endDate)}</Text>
       </View>
     );
   }
+
+  getTime(time) {
+    var hour = time.getHours();
+    var ampm = '';
+    if(hour > 12) {
+      hour -= 12;
+      ampm = 'pm';
+    }
+    else {
+      ampm = 'am';
+    }
+    return hour + ':' + time.getMinutes() + ampm;
+  }
 }
+
+const styles = StyleSheet.create({
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    left: 20,
+    marginBottom: 10,
+  },
+  formInputText: {
+    marginBottom: 10
+  }
+});

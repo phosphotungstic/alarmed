@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Modal, Text, TouchableHighlight, DatePickerIOS } from 'react-native';
+import { Button, View, Modal, Text, TouchableHighlight, DatePickerIOS, StyleSheet } from 'react-native';
 import AddAlarmModalForm from './AddAlarmModalForm.js'
 
 export default class TimePickerModal extends React.Component {
@@ -22,13 +22,13 @@ export default class TimePickerModal extends React.Component {
   render() {
     var buttonString = "Set " + this.props.type + " Time";
     return (
-      <View style={{marginTop: 22}}>
+      <View>
         <Modal
           animationType="slide"
-          transparent={true}
-          visible={this.state.modalVisible}>
-          presentationStyle="FormSheet"
-          <View style={[{marginTop: 475, backgroundColor: 'red'}, this.state.showModal ? {backgroundColor: 'rgba(0,23,0,0.5)'} : '']}>
+          visible={this.state.modalVisible}
+          presentationStyle="formSheet"
+          >
+          <View>
             <DatePickerIOS
               date={this.state.chosenDate}
               onDateChange={(date) => {
